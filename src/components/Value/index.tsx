@@ -44,7 +44,7 @@ export default function Value({ value, client, onReset, ctx }: ValueProps) {
           <div className={style.value__product__info}>
             <div className={style.value__product__title}>
               <a
-                href={`${ctx.parameters.baseEndpoint}/admin/skus/${product.id}`}
+                href={`${ctx.parameters.baseEndpoint}/admin/skus/${product.id}/edit`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
