@@ -1,5 +1,6 @@
 #Npm
 lib
+build
 
 # Cypress
 cypress/fixtures/*
