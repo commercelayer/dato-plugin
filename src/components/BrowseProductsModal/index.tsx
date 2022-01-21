@@ -1,40 +1,40 @@
-import { RenderModalCtx } from 'datocms-plugin-sdk';
-import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { Button, TextInput, Canvas, Spinner } from 'datocms-react-ui';
-import s from './styles.module.css';
-import CommerceLayerClient, { Product } from '../../utils/CommerceLayerClient';
-import useStore, { State } from '../../utils/useStore';
-import { normalizeConfig } from '../../types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
+import { RenderModalCtx } from 'datocms-plugin-sdk'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { Button, TextInput, Canvas, Spinner } from 'datocms-react-ui'
+import s from './styles.module.css'
+import CommerceLayerClient, { Product } from '../../utils/CommerceLayerClient'
+import useStore, { State } from '../../utils/useStore'
+import { normalizeConfig } from '../../types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons'
+import classNames from 'classnames'
 
-const currentSearchSelector = (state: State) => state.getCurrentSearch();
+const currentSearchSelector = (state: State) => state.getCurrentSearch()
 const currentFetchProductsMatchingSelector = (state: State) =>
-  state.fetchProductsMatching;
+  state.fetchProductsMatching
 
 export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
-  const performSearch = useStore(currentFetchProductsMatchingSelector);
-  const { query, status, products } = useStore(currentSearchSelector);
+  const performSearch = useStore(currentFetchProductsMatchingSelector)
+  const { query, status, products } = useStore(currentSearchSelector)
 
-  const [sku, setSku] = useState<string>('');
+  const [sku, setSku] = useState<string>('')
 
   const { baseEndpoint, clientId } = normalizeConfig(
-    ctx.plugin.attributes.parameters,
-  );
+    ctx.plugin.attributes.parameters
+  )
 
   const client = useMemo(() => {
-    return new CommerceLayerClient({ baseEndpoint, clientId });
-  }, [baseEndpoint, clientId]);
+    return new CommerceLayerClient({ baseEndpoint, clientId })
+  }, [baseEndpoint, clientId])
 
   useEffect(() => {
-    performSearch(client, query);
-  }, [performSearch, query, client]);
+    performSearch(client, query)
+  }, [performSearch, query, client])
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    performSearch(client, sku);
-  };
+    e.preventDefault()
+    performSearch(client, sku)
+  }
 
   return (
     <Canvas ctx={ctx}>
@@ -59,6 +59,22 @@ export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
             Search
           </Button>
         </form>
+        <div className={s['add__container']}>
+          <a
+            href={`${baseEndpoint}/admin/skus/new`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              type="button"
+              buttonType="negative"
+              buttonSize="s"
+              leftIcon={<FontAwesomeIcon icon={faPlus} />}
+            >
+              New SKU
+            </Button>
+          </a>
+        </div>
         <div className={s['container']}>
           {products && (
             <div
@@ -100,5 +116,5 @@ export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
         </div>
       </div>
     </Canvas>
-  );
+  )
 }

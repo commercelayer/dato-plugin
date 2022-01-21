@@ -1,45 +1,45 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { normalizeConfig } from '../../types';
-import { useCtx } from 'datocms-react-ui';
-import { RenderFieldExtensionCtx } from 'datocms-plugin-sdk';
-import CommerceLayerClient from '../../utils/CommerceLayerClient';
-import useStore, { State } from '../../utils/useStore';
-import s from './styles.module.css';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useCallback, useEffect, useMemo } from 'react'
+import { normalizeConfig } from '../../types'
+import { useCtx } from 'datocms-react-ui'
+import { RenderFieldExtensionCtx } from 'datocms-plugin-sdk'
+import CommerceLayerClient from '../../utils/CommerceLayerClient'
+import useStore, { State } from '../../utils/useStore'
+import s from './styles.module.css'
+import classNames from 'classnames'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faExternalLinkAlt,
   faTimesCircle,
-} from '@fortawesome/free-solid-svg-icons';
+} from '@fortawesome/free-solid-svg-icons'
 
-const fetchProductByCodeSelector = (state: State) => state.fetchProductByCode;
+const fetchProductByCodeSelector = (state: State) => state.fetchProductByCode
 
 export type ValueProps = {
-  value: string;
-  onReset: () => void;
-};
+  value: string
+  onReset: () => void
+}
 
 export default function Value({ value, onReset }: ValueProps) {
-  const ctx = useCtx<RenderFieldExtensionCtx>();
+  const ctx = useCtx<RenderFieldExtensionCtx>()
 
   const { baseEndpoint, clientId } = normalizeConfig(
-    ctx.plugin.attributes.parameters,
-  );
+    ctx.plugin.attributes.parameters
+  )
 
   const client = useMemo(
     () => new CommerceLayerClient({ baseEndpoint, clientId }),
-    [baseEndpoint, clientId],
-  );
+    [baseEndpoint, clientId]
+  )
 
   const { product, status } = useStore(
-    useCallback((state) => state.getProduct(value), [value]),
-  );
+    useCallback((state) => state.getProduct(value), [value])
+  )
 
-  const fetchProductByCode = useStore(fetchProductByCodeSelector);
+  const fetchProductByCode = useStore(fetchProductByCodeSelector)
 
   useEffect(() => {
-    fetchProductByCode(client, value);
-  }, [client, value, fetchProductByCode]);
+    fetchProductByCode(client, value)
+  }, [client, value, fetchProductByCode])
 
   return (
     <div
@@ -62,7 +62,7 @@ export default function Value({ value, onReset }: ValueProps) {
           <div className={s['product__info']}>
             <div className={s['product__title']}>
               <a
-                href={`${ctx.parameters.baseEndpoint}/admin/skus/${product.id}/edit`}
+                href={`${baseEndpoint}/admin/skus/${product.id}/edit`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -87,5 +87,5 @@ export default function Value({ value, onReset }: ValueProps) {
         <FontAwesomeIcon icon={faTimesCircle} />
       </button>
     </div>
-  );
+  )
 }
