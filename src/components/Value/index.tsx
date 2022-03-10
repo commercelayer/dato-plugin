@@ -40,7 +40,6 @@ export default function Value({ value, onReset }: ValueProps) {
   useEffect(() => {
     fetchProductByCode(client, value)
   }, [client, value, fetchProductByCode])
-
   return (
     <div
       className={classNames(s['value'], {
