@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/commercelayer/dato-plugin/compare/v1.0.0...v1.0.1) (2022-03-10)
+
+
+### Bug Fixes
+
+* Select SKU ([9d9c460](https://github.com/commercelayer/dato-plugin/commit/9d9c46052c3feb7590a22145e222e48c4be6c888))
+
 # 1.0.0 (2022-01-24)
 
 
