@@ -19,13 +19,13 @@ export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
 
   const [sku, setSku] = useState<string>('')
 
-  const { baseEndpoint, clientId } = normalizeConfig(
+  const { baseEndpoint, clientId, clientSecret } = normalizeConfig(
     ctx.plugin.attributes.parameters
   )
 
   const client = useMemo(() => {
-    return new CommerceLayerClient({ baseEndpoint, clientId })
-  }, [baseEndpoint, clientId])
+    return new CommerceLayerClient({ baseEndpoint, clientId, clientSecret })
+  }, [baseEndpoint, clientId, clientSecret])
 
   useEffect(() => {
     performSearch(client, query)

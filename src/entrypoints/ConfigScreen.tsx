@@ -1,13 +1,13 @@
-import { RenderConfigScreenCtx } from 'datocms-plugin-sdk';
-import { Button, Canvas, TextField, Form, FieldGroup } from 'datocms-react-ui';
-import { Form as FormHandler, Field } from 'react-final-form';
-import { ValidConfig, normalizeConfig } from '../types';
-import CommerceLayerClient from '../utils/CommerceLayerClient';
-import s from './styles.module.css';
+import { RenderConfigScreenCtx } from 'datocms-plugin-sdk'
+import { Button, Canvas, TextField, Form, FieldGroup } from 'datocms-react-ui'
+import { Form as FormHandler, Field } from 'react-final-form'
+import { ValidConfig, normalizeConfig } from '../types'
+import CommerceLayerClient from '../utils/CommerceLayerClient'
+import s from './styles.module.css'
 
 type Props = {
-  ctx: RenderConfigScreenCtx;
-};
+  ctx: RenderConfigScreenCtx
+}
 
 export default function ConfigScreen({ ctx }: Props) {
   return (
@@ -15,31 +15,35 @@ export default function ConfigScreen({ ctx }: Props) {
       <FormHandler<ValidConfig>
         initialValues={normalizeConfig(ctx.plugin.attributes.parameters)}
         validate={(values: ValidConfig) => {
-          const errors: Record<string, string> = {};
+          const errors: Record<string, string> = {}
 
           if (!values.baseEndpoint) {
-            errors.baseEndpoint = 'This field is required!';
+            errors.baseEndpoint = 'This field is required!'
           }
 
           if (!values.clientId) {
-            errors.clientId = 'This field is required!';
+            errors.clientId = 'This field is required!'
           }
 
-          return errors;
+          if (!values.clientSecret) {
+            errors.clientSecret = 'This field is required!'
+          }
+
+          return errors
         }}
         onSubmit={async (values: ValidConfig) => {
           try {
-            const client = new CommerceLayerClient(values);
-            await client.getToken();
+            const client = new CommerceLayerClient(values)
+            await client.getToken()
           } catch (e) {
             return {
               tupleFailing:
                 'The Client ID seems to be invalid for the specified Commerce Layer base endpoint!',
-            };
+            }
           }
 
-          await ctx.updatePluginParameters(values);
-          ctx.notice('Settings updated successfully!');
+          await ctx.updatePluginParameters(values)
+          ctx.notice('Settings updated successfully!')
         }}
       >
         {({ values, handleSubmit, submitting, dirty, submitErrors }) => (
@@ -67,25 +71,31 @@ export default function ConfigScreen({ ctx }: Props) {
                     id="clientId"
                     label="OAuth Application Client ID"
                     hint={
-                      values.baseEndpoint ? (
-                        <>
-                          Go to{' '}
-                          <a
-                            href={`${values.baseEndpoint}/admin/settings/applications`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {values.baseEndpoint}/admin/settings/applications
-                          </a>{' '}
-                          to find your OAuth applications
-                        </>
-                      ) : (
-                        <>
-                          Go to Admin &gt; Settings &gt; Applications to find
-                          your OAuth applications
-                        </>
-                      )
+                      <>
+                        Go to{' '}
+                        <a
+                          href={`https://dashboard.commercelayer.io`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          our Dashboard
+                        </a>{' '}
+                        to find your OAuth applications
+                      </>
                     }
+                    required
+                    textInputProps={{ monospaced: true }}
+                    placeholder="XXXYYY"
+                    error={error}
+                    {...input}
+                  />
+                )}
+              </Field>
+              <Field name="clientSecret">
+                {({ input, meta: { error } }) => (
+                  <TextField
+                    id="clientSecret"
+                    label="OAuth Application Client Secret"
                     required
                     textInputProps={{ monospaced: true }}
                     placeholder="XXXYYY"
@@ -121,5 +131,5 @@ export default function ConfigScreen({ ctx }: Props) {
         )}
       </FormHandler>
     </Canvas>
-  );
+  )
 }

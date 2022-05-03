@@ -22,13 +22,13 @@ export type ValueProps = {
 export default function Value({ value, onReset }: ValueProps) {
   const ctx = useCtx<RenderFieldExtensionCtx>()
 
-  const { baseEndpoint, clientId } = normalizeConfig(
+  const { baseEndpoint, clientId, clientSecret } = normalizeConfig(
     ctx.plugin.attributes.parameters
   )
 
   const client = useMemo(
-    () => new CommerceLayerClient({ baseEndpoint, clientId }),
-    [baseEndpoint, clientId]
+    () => new CommerceLayerClient({ baseEndpoint, clientId, clientSecret }),
+    [baseEndpoint, clientId, clientSecret]
   )
 
   const { product, status } = useStore(

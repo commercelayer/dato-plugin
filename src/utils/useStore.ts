@@ -53,9 +53,8 @@ const useStore = create<State>(
             status: 'loading',
             result: [],
           }
-
           return {
-            query: state.query,
+            query: '',
             status: search.status,
             products:
               search.result &&
@@ -88,7 +87,6 @@ const useStore = create<State>(
             state.searches[query].status = 'loading'
             state.query = query
           })
-
           try {
             const products = await client.productsMatching(query)
 
