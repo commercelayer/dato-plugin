@@ -14,14 +14,17 @@ export type Product = {
 export default class CommerceLayerClient {
   baseEndpoint: string
   clientId: string
+  clientSecret: string
   token: string | null
 
   constructor({
     baseEndpoint,
     clientId,
-  }: Pick<ValidConfig, 'baseEndpoint' | 'clientId'>) {
+    clientSecret,
+  }: Pick<ValidConfig, 'baseEndpoint' | 'clientId' | 'clientSecret'>) {
     this.baseEndpoint = baseEndpoint
     this.clientId = clientId
+    this.clientSecret = clientSecret
     this.token = null
   }
 
@@ -59,6 +62,7 @@ export default class CommerceLayerClient {
       body: JSON.stringify({
         grant_type: 'client_credentials',
         client_id: this.clientId,
+        client_secret: this.clientSecret,
       }),
     })
 
