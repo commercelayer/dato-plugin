@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/commercelayer/dato-plugin/compare/v1.0.1...v2.0.0) (2022-05-03)
+
+
+### Performance Improvements
+
+* Update plugin settings ([191597e](https://github.com/commercelayer/dato-plugin/commit/191597e5f4f6299ae5eaa34059fe3aee85030a98))
+
+
+### BREAKING CHANGES
+
+* Old CL `datocms` application won't work anymore, must update the settings with a new integration application available on new dashboard
+
 ## [1.0.1](https://github.com/commercelayer/dato-plugin/compare/v1.0.0...v1.0.1) (2022-03-10)
 
 
