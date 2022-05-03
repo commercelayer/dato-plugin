@@ -4,13 +4,13 @@ A plugin that allows users to search and select Commerce Layer SKUs.
 
 ## Credentials (Commerce Layer)
 
-Go in your Commerce Layer project > Settings > Applications and create a new `datocms` application. It should look something like this:
+Go in your Commerce Layer dashboard > Organization > Integration and create a new `datocms` application. It should look something like this:
 
-![Application](docs/application.jpg)
+![Application](docs/application.png)
 
-Get the application's Base endpoint and Client ID:
+Get the application's Base endpoint, Client ID ans Client secret:
 
-![Credentials](docs/credentials.jpg)
+![Credentials](docs/credentials.png)
 
 ## Configuration (DatoCMS)
 
