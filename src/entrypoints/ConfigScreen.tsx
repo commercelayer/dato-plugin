@@ -56,7 +56,7 @@ export default function ConfigScreen({ ctx }: Props) {
                 {({ input, meta: { error } }) => (
                   <TextField
                     id="baseEndpoint"
-                    label="Commerce Layer Base endpoint"
+                    label="Commerce Layer organization base endpoint"
                     placeholder="https://XXXXXXXXX.commercelayer.io"
                     required
                     error={error}
@@ -69,20 +69,7 @@ export default function ConfigScreen({ ctx }: Props) {
                 {({ input, meta: { error } }) => (
                   <TextField
                     id="clientId"
-                    label="OAuth Application Client ID"
-                    hint={
-                      <>
-                        Go to{' '}
-                        <a
-                          href={`https://dashboard.commercelayer.io`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          our Dashboard
-                        </a>{' '}
-                        to find your OAuth applications
-                      </>
-                    }
+                    label="Commerce Layer application client ID"
                     required
                     textInputProps={{ monospaced: true }}
                     placeholder="XXXYYY"
@@ -95,7 +82,7 @@ export default function ConfigScreen({ ctx }: Props) {
                 {({ input, meta: { error } }) => (
                   <TextField
                     id="clientSecret"
-                    label="OAuth Application Client Secret"
+                    label="Commerce Layer application client Secret"
                     required
                     textInputProps={{ monospaced: true }}
                     placeholder="XXXYYY"
@@ -108,7 +95,7 @@ export default function ConfigScreen({ ctx }: Props) {
                 {({ input, meta: { error } }) => (
                   <TextField
                     id="autoApplyToFieldsWithApiKey"
-                    label="Auto-apply this plugin to all Single-line fields fields matching the following API identifier:"
+                    label="Auto-apply this plugin to all single-line fields fields matching the following API identifier:"
                     hint="A regular expression can be used"
                     placeholder="commercelayer_sku"
                     error={error}
