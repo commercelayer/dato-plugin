@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/commercelayer/dato-plugin/compare/v2.0.1...v2.0.2) (2022-05-06)
+
+
+### Bug Fixes
+
+* README images ([c52734f](https://github.com/commercelayer/dato-plugin/commit/c52734fcf70256a95dda9f52c4691371e5f96807))
+
 ## [2.0.1](https://github.com/commercelayer/dato-plugin/compare/v2.0.0...v2.0.1) (2022-05-06)
 
 
