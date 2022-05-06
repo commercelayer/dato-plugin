@@ -34,9 +34,9 @@ To use the plugin you need to add a single-line field to you model in DatoCMS an
 
 Now you can browse your Commerce Layer organization SKUs, search and select them from the UI. You can also create and add new SKUs by clicking the button that redirects to Commerce Layer admin UI:
 
-![SKU search](docs/sku-search.png)
-![SKU selection](docs/sku-selection.png)
+![SKU search](docs/SKU-search.png)
+![SKU selection](docs/SKU-selection.png)
 
 The selected SKU's main information will then show in the related record:
 
-![SKU visualization](docs/sku-visualization.png)
+![SKU visualization](docs/SKU-visualization.png)
