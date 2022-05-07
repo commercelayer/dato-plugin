@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/commercelayer/dato-plugin/compare/v2.0.2...v2.0.3) (2022-05-07)
+
+
+### Bug Fixes
+
+* removed sentence from README ([5ac1225](https://github.com/commercelayer/dato-plugin/commit/5ac12255260eecc08ebac90576533fbb1db53921))
+
 ## [2.0.2](https://github.com/commercelayer/dato-plugin/compare/v2.0.1...v2.0.2) (2022-05-06)
 
 
