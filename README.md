@@ -12,9 +12,7 @@ Now you can access the application's base endpoint, cliend ID, and client secret
 
 ![Application credentials](docs/app-credentials.png)
 
-> **BACKWORD COMPATIBILITY** — Please note that if you are upgrading from a previous version (older than `v2.0.0`) you neeed to change your plugin settings to use an integration app because old datocms Commerce Layer apps have been dismissed and don't work with the new versions of the plugin.
-
-Go in your Commerce Layer dashboard > Organization > Integration and create a new `datocms` application. It should look something like this:
+> **BACKWORD COMPATIBILITY** — Please note that if you are upgrading from a previous version (older than `v2.0.0`) you neeed to change your plugin settings to use an _integration_ app because old _datocms_ Commerce Layer apps have been dismissed and don't work with the new versions of the plugin.
 
 ## Plugin configuration (DatoCMS)
 
@@ -26,13 +24,13 @@ You can either hook this plugin manually to your single-line fields, or specify 
 
 ## Usage
 
-To use the plugin you need to add a single-line field to you model in DatoCMS and select _Commerce Layer SKU_ from the dropdown menu in the _Presentation tab_:
+To use the plugin you need to add a single-line text field to you model in DatoCMS and select _Commerce Layer SKU_ from the dropdown menu in the _Presentation tab_:
 
 ![Field type](docs/field-type.png)
 ![Field settings](docs/field-settings.jpg)
 ![Field presentation](docs/field-presentation.png)
 
-Now you can browse your Commerce Layer organization SKUs, search and select them from the UI. You can also create and add new SKUs by clicking the button that redirects to Commerce Layer admin UI:
+Now you can browse your Commerce Layer organization SKUs, search and select them from the UI. You can also create and add new SKUs by clicking the button that redirects to Commerce Layer admin dashboard:
 
 ![SKU search](docs/SKU-search.png)
 ![SKU selection](docs/SKU-selection.png)
