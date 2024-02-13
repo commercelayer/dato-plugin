@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-import produce from 'immer'
+import { produce } from 'immer'
 import CommerceLayerClient, { Product } from './CommerceLayerClient'
 
 export type Status = 'loading' | 'success' | 'error'
@@ -26,6 +26,7 @@ export type State = {
 }
 
 const useStore = create<State>(
+  // @ts-expect-error zustand middleware types are not compatible with the persist middleware
   persist(
     (rawSet, get) => {
       const set = (setFn: (s: State) => void) => {
