@@ -20,8 +20,8 @@ jobs:
       - name: Node 🧰
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: 'pnpm'
+          node-version: 18.x
+          cache: "pnpm"
 
       - name: Install 📦
         run: pnpm install
@@ -30,7 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Publish 🚀 PRERELEASE
-        if: 'github.event.release.prerelease'
+        if: "github.event.release.prerelease"
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
           pnpm -r publish --tag next --no-git-checks --access public
@@ -38,13 +38,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish 🚀 PRODUCTION
-        if: '!github.event.release.prerelease'
+        if: "!github.event.release.prerelease"
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
           pnpm -r publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Trigger deploy to gh-pages 🚀
         # if: '!github.event.release.prerelease'
         uses: actions/github-script@v6
