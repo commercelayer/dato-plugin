@@ -54,7 +54,7 @@ export default class CommerceLayerClient {
       return this.token
     }
 
-    const response = await fetch(`${this.baseEndpoint}/oauth/token`, {
+    const response = await fetch('https://auth.commercelayer.io/oauth/token', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
