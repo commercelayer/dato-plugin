@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Alessandro Casazza <alessandro@commercelayer.io>",
   "license": "ISC",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
