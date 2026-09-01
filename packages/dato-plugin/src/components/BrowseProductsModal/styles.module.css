@@ -37,8 +37,8 @@
 }
 
 .product:hover {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px var(--semi-transparent-accent-color);
+  border-color: var(--color--focus--border);
+  box-shadow: 0 0 0 3px var(--color--focus--outline);
 }
 
 .product__content {
@@ -67,7 +67,7 @@
 .product__title {
   font-size: var(--font-size-s);
   margin-top: 2px;
-  color: #999;
+  color: var(--light-body-color);
 }
 
 .empty {
