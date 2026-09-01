@@ -10,17 +10,16 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: pnpm 🧰
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v5
 
       - name: Node 🧰
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24.x
+          registry-url: https://registry.npmjs.org
           cache: "pnpm"
 
       - name: Install 📦
@@ -60,8 +59,10 @@ jobs:
 
       - name: Post to a Slack channel
         id: slack
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@v3.0.1
         with:
+          webhook: ${{ secrets.PIPELINE_SLACK_CHANNEL_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           # Slack channel id, channel name, or user id to post message.
           # See also: https://api.slack.com/methods/chat.postMessage#channels
           # channel-id: 'pipeline'
@@ -106,6 +107,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.PIPELINE_SLACK_CHANNEL_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
