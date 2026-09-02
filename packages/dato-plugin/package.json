@@ -7,6 +7,10 @@
   "author": "Alessandro Casazza <alessandro@commercelayer.io>",
   "license": "ISC",
   "version": "3.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commercelayer/dato-plugin.git"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
