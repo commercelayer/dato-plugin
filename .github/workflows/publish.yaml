@@ -8,36 +8,46 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v6
 
       - name: pnpm 🧰
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
 
       - name: Node 🧰
         uses: actions/setup-node@v6
         with:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
-          cache: "pnpm"
+          cache: 'pnpm'
 
-      - name: Update npm 📦
-        run: npm install -g npm@11.11.0
+      # npm >= 11.5.1 is required for trusted publishing (OIDC) on npmjs.
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Install 📦
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build 🛠
         run: pnpm build
 
+      - name: Uncommitted changes 🔎
+        run: git status
+
       - name: Publish 🚀 PRERELEASE
         if: 'github.event.release.prerelease'
-        run: pnpm -r publish --tag next --no-git-checks --access public
+        run: |
+          pnpm -r publish --tag next --no-git-checks --access public
 
       - name: Publish 🚀 PRODUCTION
         if: '!github.event.release.prerelease'
-        run: pnpm -r publish --no-git-checks --access public
+        run: |
+          pnpm -r publish --no-git-checks --access public
 
       - name: Post to a Slack channel
         id: slack
