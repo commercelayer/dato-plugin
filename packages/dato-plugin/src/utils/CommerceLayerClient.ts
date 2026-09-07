@@ -1,3 +1,4 @@
+import { authenticate, getCoreApiBaseEndpoint } from '@commercelayer/js-auth'
 import qs from 'qs'
 import { ValidConfig } from '../types'
 
@@ -12,17 +13,14 @@ export type Product = {
 }
 
 export default class CommerceLayerClient {
-  baseEndpoint: string
   clientId: string
   clientSecret: string
   token: string | null
 
   constructor({
-    baseEndpoint,
     clientId,
     clientSecret,
-  }: Pick<ValidConfig, 'baseEndpoint' | 'clientId' | 'clientSecret'>) {
-    this.baseEndpoint = baseEndpoint
+  }: Pick<ValidConfig, 'clientId' | 'clientSecret'>) {
     this.clientId = clientId
     this.clientSecret = clientSecret
     this.token = null
@@ -54,34 +52,37 @@ export default class CommerceLayerClient {
       return this.token
     }
 
-    const response = await fetch('https://auth.commercelayer.io/oauth/token', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        grant_type: 'client_credentials',
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
-      }),
+    const { accessToken } = await authenticate('client_credentials', {
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
     })
 
-    if (response.status !== 200) {
-      throw new Error(`Invalid status code: ${response.status}`)
+    if (!accessToken) {
+      throw new Error('Could not retrieve an access token')
     }
 
-    const body = await response.json()
-
-    this.token = body.access_token
+    this.token = accessToken
 
     return this.token
   }
 
-  async get(path: string, filters = {}) {
+  /**
+   * The organization base endpoint is derived from the access token itself:
+   * the organization slug and the domain (`commercelayer.io` / `.co`) both come
+   * from the JWT payload, so there's no need to ask the user for it.
+   */
+  async getBaseEndpoint() {
     const token = await this.getToken()
 
+    return getCoreApiBaseEndpoint(token)
+  }
+
+  async get(path: string, filters = {}) {
+    const token = await this.getToken()
+    const baseEndpoint = await this.getBaseEndpoint()
+
     const response = await fetch(
-      `${this.baseEndpoint}${path}${qs.stringify(filters, {
+      `${baseEndpoint}${path}${qs.stringify(filters, {
         addQueryPrefix: true,
       })}`,
       {

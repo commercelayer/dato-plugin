@@ -7,6 +7,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "start": "pnpm -r start",
     "build": "pnpm -r build",
     "prepare": "husky install",
     "make:version": "lerna version --no-private",
