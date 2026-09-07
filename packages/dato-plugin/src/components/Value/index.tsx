@@ -11,6 +11,7 @@ import {
   faExternalLinkAlt,
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons'
+import useDashboardLink from '../../utils/useDashboardLink'
 
 const fetchProductByCodeSelector = (state: State) => state.fetchProductByCode
 
@@ -22,14 +23,16 @@ export type ValueProps = {
 export default function Value({ value, onReset }: ValueProps) {
   const ctx = useCtx<RenderFieldExtensionCtx>()
 
-  const { baseEndpoint, clientId, clientSecret } = normalizeConfig(
+  const { clientId, clientSecret } = normalizeConfig(
     ctx.plugin.attributes.parameters
   )
 
   const client = useMemo(
-    () => new CommerceLayerClient({ baseEndpoint, clientId, clientSecret }),
-    [baseEndpoint, clientId, clientSecret]
+    () => new CommerceLayerClient({ clientId, clientSecret }),
+    [clientId, clientSecret]
   )
+
+  const dashboardLink = useDashboardLink(client)
 
   const { product, status } = useStore(
     useCallback((state) => state.getProduct(value), [value])
@@ -60,14 +63,21 @@ export default function Value({ value, onReset }: ValueProps) {
           />
           <div className={s['product__info']}>
             <div className={s['product__title']}>
-              <a
-                href={`${baseEndpoint}/admin/skus/${product.id}/edit`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {product.attributes.name}
-              </a>
-              <FontAwesomeIcon icon={faExternalLinkAlt} />
+              {dashboardLink ? (
+                <>
+                  <a
+                    title="Manage in Commerce Layer"
+                    href={`${dashboardLink}/apps/skus/list/${product.id}/edit`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {product.attributes.name}
+                  </a>
+                  <FontAwesomeIcon icon={faExternalLinkAlt} />
+                </>
+              ) : (
+                product.attributes.name
+              )}
             </div>
             <div className={s['product__producttype']}>
               <strong>SKU:</strong>

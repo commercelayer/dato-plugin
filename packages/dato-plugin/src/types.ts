@@ -1,7 +1,6 @@
 export type FirstInstallationParameters = {}
 
 export type ValidConfig = {
-  baseEndpoint: string
   clientId: string
   clientSecret: string
   autoApplyToFieldsWithApiKey: string
@@ -29,7 +28,6 @@ export function normalizeConfig(params: Config): ValidConfig {
 
   return {
     paramsVersion: '2',
-    baseEndpoint: 'baseEndpoint' in params ? params.baseEndpoint : '',
     clientId: 'clientId' in params ? params.clientId : '',
     clientSecret: 'clientSecret' in params ? params.clientSecret : '',
     autoApplyToFieldsWithApiKey: '',

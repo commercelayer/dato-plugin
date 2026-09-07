@@ -8,6 +8,7 @@ import { normalizeConfig } from '../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
+import useDashboardLink from '../../utils/useDashboardLink'
 
 const currentSearchSelector = (state: State) => state.getCurrentSearch()
 const currentFetchProductsMatchingSelector = (state: State) =>
@@ -19,14 +20,16 @@ export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
 
   const [sku, setSku] = useState<string>('')
 
-  const { baseEndpoint, clientId, clientSecret } = normalizeConfig(
+  const { clientId, clientSecret } = normalizeConfig(
     ctx.plugin.attributes.parameters
   )
 
   const client = useMemo(() => {
-    return new CommerceLayerClient({ baseEndpoint, clientId, clientSecret })
-  }, [baseEndpoint, clientId, clientSecret])
+    return new CommerceLayerClient({ clientId, clientSecret })
+  }, [clientId, clientSecret])
 
+  const dashboardLink = useDashboardLink(client)
+  
   useEffect(() => {
     performSearch(client, query)
   }, [performSearch, query, client])
@@ -53,28 +56,31 @@ export default function BrowseProductsModal({ ctx }: { ctx: RenderModalCtx }) {
             type="submit"
             buttonType="primary"
             buttonSize="s"
-            leftIcon={<FontAwesomeIcon icon={faSearch} />}
+            leftIcon={<FontAwesomeIcon icon={faSearch} style={{ color: 'white' }} />}
             disabled={status === 'loading'}
           >
             Search
           </Button>
         </form>
-        <div className={s['add__container']}>
-          <a
-            href={`${baseEndpoint}/admin/skus/new`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              type="button"
-              buttonType="negative"
-              buttonSize="s"
-              leftIcon={<FontAwesomeIcon icon={faPlus} />}
+        {dashboardLink && (
+          <div className={s['add__container']}>
+            <a
+              title="Manage in Commerce Layer"
+              href={`${dashboardLink}/apps/skus/new`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              New SKU
-            </Button>
-          </a>
-        </div>
+              <Button
+                type="button"
+                buttonType="primary"
+                buttonSize="s"
+                leftIcon={<FontAwesomeIcon icon={faPlus} style={{ color: 'white' }} />}
+              >
+                New SKU
+              </Button>
+            </a>
+          </div>
+        )}
         <div className={s['container']}>
           {products && (
             <div
