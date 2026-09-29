@@ -13,11 +13,11 @@
     "make:version": "lerna version --no-private",
     "make:version:force": "lerna version --no-private --force-publish",
     "dep:major": "pnpm dlx npm-check-updates --packageFile '**/package.json' -u",
-    "dep:minor": "pnpm dlx npm-check-updates -t semver --packageFile '**/package.json' -u"
+    "dep:minor": "pnpm dlx npm-check-updates -t semver --packageFile '**/package.json' -u",
+    "lerna": "pnpm dlx lerna@10.0.1"
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lerna": "^10.0.1",
     "typescript": "^5.9.3"
   },
   "engines": {
