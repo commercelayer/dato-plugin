@@ -12,7 +12,7 @@
     "url": "git+https://github.com/commercelayer/dato-plugin.git"
   },
   "dependencies": {
-    "@commercelayer/js-auth": "^8.0.1",
+    "@commercelayer/js-auth": "^8.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.6",
@@ -20,11 +20,11 @@
     "@types/react-dom": "^18.3.7",
     "classnames": "^2.5.1",
     "datocms-plugin-sdk": "^2.5.0",
-    "datocms-react-ui": "^2.5.0",
+    "datocms-react-ui": "^2.5.1",
     "final-form": "^4.20.10",
     "immer": "^10.2.0",
     "lodash-es": "^4.18.1",
-    "qs": "^6.16.0",
+    "qs": "^6.17.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-final-form": "^6.5.9",
@@ -46,10 +46,10 @@
   ],
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.19.0",
+    "@types/node": "^24.19.2",
     "@types/qs": "^6.15.1",
-    "@vitejs/plugin-react": "^6.1.1",
-    "vite": "^8.3.1"
+    "@vitejs/plugin-react": "^6.2.1",
+    "vite": "^8.3.6"
   },
   "files": [
     "docs",
